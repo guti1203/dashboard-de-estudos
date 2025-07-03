@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Estudos</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+  if (!localStorage.getItem('usuarioLogado')) {
+    window.location.href = 'login.html';
+  }
+</script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-content">
+        <h1 class="logo">📚 Meu Dashboard de Estudos</h1>
+        <div class="theme-switcher">
+          <button class="theme-btn light" data-theme="light">☀️</button>
+          <button class="theme-btn dark" data-theme="dark">🌙</button>
+          <button class="theme-btn gamer" data-theme="gamer">🎮</button>
+          <button id="logoutBtn" class="btn logout-btn">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <section class="summary-section">
+        <div class="summary-card">
+          <h2>Resumo Geral</h2>
+          <div class="progress-container">
+            <div class="progress-info">
+              <span>Progresso Total</span>
+              <span class="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-value">0</span>
+              <span class="stat-label">Cursos</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">0h</span>
+              <span class="stat-label">Esta semana</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">0</span>
+              <span class="stat-label">Concluídos</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="challenges-section">
+        <div class="section-header">
+          <h2>🎯 Desafios Diários</h2>
+          <span class="section-badge">0/3 completos</span>
+        </div>
+        <div class="challenges-list">
+          <div class="challenge-item">
+            <input type="checkbox" id="challenge1">
+            <label for="challenge1">Estudar por pelo menos 1 hora</label>
+          </div>
+          <div class="challenge-item">
+            <input type="checkbox" id="challenge2">
+            <label for="challenge2">Revisar anotações</label>
+          </div>
+          <div class="challenge-item">
+            <input type="checkbox" id="challenge3">
+            <label for="challenge3">Completar 1 exercício prático</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="add-course-section">
+        <h2>Adicionar Novo Curso</h2>
+        <form class="course-form" id="courseForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="course-name">Nome do Curso</label>
+              <input type="text" id="course-name" placeholder="Ex: JavaScript Avançado" required>
+            </div>
+            <div class="form-group">
+              <label for="course-area">Área</label>
+              <input type="text" id="course-area" placeholder="Ex: Programação" required>
+            </div>
+            <div class="form-group">
+              <label for="course-hours">Carga Horária (h)</label>
+              <input type="number" id="course-hours" placeholder="Ex: 40" required min="1">
+            </div>
+            <div class="form-group">
+              <label for="course-status">Status</label>
+              <select id="course-status" required>
+                <option value="planned">Planejado</option>
+                <option value="in-progress">Em andamento</option>
+                <option value="completed">Concluído</option>
+                <option value="paused">Pausado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="course-progress">Progresso (%)</label>
+              <input type="range" id="course-progress" min="0" max="100" value="0">
+              <span class="progress-value">0%</span>
+            </div>
+            <div class="form-group full-width">
+              <label for="course-notes">Anotações</label>
+              <textarea id="course-notes" rows="3" placeholder="Anotações sobre o curso..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Adicionar Curso</button>
+        </form>
+      </section>
+
+      <section class="courses-section">
+        <div class="section-header">
+          <h2>📋 Meus Cursos</h2>
+          <div class="filter-controls">
+            <label for="course-filter">Filtrar:</label>
+            <select id="course-filter">
+              <option value="all">Todos</option>
+              <option value="planned">Planejados</option>
+              <option value="in-progress">Em andamento</option>
+              <option value="completed">Concluídos</option>
+              <option value="paused">Pausados</option>
+            </select>
+          </div>
+        </div>
+        <div class="courses-grid" id="coursesGrid">
+          <div class="no-courses"><p>Nenhum curso cadastrado ainda</p></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="titulo-secao">Tarefas do Dia 🗓️</h2>
+        <form class="form-tarefa" id="formTarefa">
+          <input type="text" id="novaTarefa" placeholder="Digite sua tarefa" required />
+          <button type="submit">➕</button>
+        </form>
+        <ul class="lista-tarefas" id="listaTarefas"></ul>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Meu Projeto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; background: #f0f0f0;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input {
+      padding: 0.7rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.7rem;
+      font-size: 1rem;
+      background-color: #4361ee;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #3f37c9;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="loginForm">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário" required />
+    <input type="password" id="password" placeholder="Senha" required />
+    <button type="submit">Entrar</button>
+    <div class="error" id="errorMsg"></div>
+  </form>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    const users = {
+      "gustavo": { password: "gustavo1234", page: "gustavo.html" },
+      "evellyn": { password: "evellyn1234", page: "evellyn.html" },
+      "manoella": { password: "manu1234", page: "index.html" }
+    };
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.toLowerCase();
+      const password = document.getElementById("password").value;
+
+      if (users[username] && users[username].password === password) {
+        
+        localStorage.setItem("usuarioLogado", username);
+        
+        window.location.href = users[username].page;
+      } else {
+        alert("Usuário ou senha incorretos");
+      }
+    });
+  </script>
+
+</body>
+</html>
